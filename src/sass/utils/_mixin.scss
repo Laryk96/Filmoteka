@@ -1,0 +1,26 @@
+@mixin mobail-use($width: 480px) {
+  @media screen and (min-width: $width) {
+    width: $width;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@mixin tablet-use($width: 768px) {
+  @media screen and (min-width: $width) {
+    width: $width;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+@mixin desktop-use($width: 1200px) {
+  @media screen and (min-width: $width) {
+    width: $width;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+// @mixin retina {
+//   @media (min-device-pixel-ratio: 2),
+//     (min-resolution: 192dpi),
+//     (min-resolution: 2dppx);
+// }

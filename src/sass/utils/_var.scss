@@ -1,0 +1,11 @@
+$text-color: (
+  "black": #000000,
+  "yellow": #ff6b08,
+  "withe": #ffff,
+  "gray": #545454,
+  "_red": #ff001b,
+);
+
+@function text($key) {
+  @return map-get($text-color, $key);
+}
