@@ -15,9 +15,22 @@
   justify-content: space-between;
   margin-bottom: 56px;
 }
+
+.logo {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+}
 .logo__svg {
   width: 20px;
   height: 20px;
+
+  @media screen and (min-width: 768px) {
+    width: 24px;
+    height: 24px;
+  }
 }
 .logo__text {
   display: none;
