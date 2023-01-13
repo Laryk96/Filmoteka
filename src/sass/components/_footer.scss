@@ -1,0 +1,29 @@
+.footer {
+  background-color: #f7f7f7;
+}
+.container--footer {
+  padding-top: 28px;
+  padding-bottom: 30px;
+
+  text-align: center;
+}
+
+.footer-info__text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.142;
+
+  color: #545454;
+
+  &:first-child {
+    margin-bottom: 10px;
+  }
+}
+.footer_icon {
+  width: 15px;
+  height: 15px;
+}
+.footer__wrapper {
+  margin-left: 10px;
+  margin-right: 10px;
+}
