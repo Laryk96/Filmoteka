@@ -20,7 +20,7 @@ export default class ApiService {
   searchFilms() {
     return axios
       .get(
-        `${baseUrl}/3/search/movie?api_key=${API_KEY}&language=en-US&page=${this._paga}&query=${this._search}`
+        `${baseUrl}/3/search/movie?api_key=${API_KEY}&query=${this._search}&language=en-US&page=${this._paga}`
       )
       .then(resalt => resalt.data.results);
   }

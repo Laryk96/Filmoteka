@@ -25,8 +25,9 @@ function onSubmitForm(event) {
 function search() {
   try {
     getFilms._paga = 1;
+    getFilms._search = localStorage.getItem(KEY_STORAGE);
+
     getFilms.searchFilms().then(films => {
-      console.log('good');
       refs.contentsList.innerHTML = '';
       renderCards(films);
     });
