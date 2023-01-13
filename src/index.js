@@ -6,7 +6,6 @@ const getFilms = new ApiService();
 const KEY_STORAGE = 'search';
 
 getFilms.getPopularFilms().then(films => {
-  console.log(films);
   renderCards(films);
 });
 
@@ -28,10 +27,16 @@ function search() {
     getFilms._search = localStorage.getItem(KEY_STORAGE);
 
     getFilms.searchFilms().then(films => {
+      refs.errorText.classList.add('hidden');
+      if (films.length === 0) {
+        console.log('пусто');
+        refs.errorText.classList.remove('hidden');
+        console.log(refs.errorText.classList);
+      }
       refs.contentsList.innerHTML = '';
       renderCards(films);
     });
-  } catch {
-    console.log('error');
+  } catch (error) {
+    console.log(error);
   }
 }
