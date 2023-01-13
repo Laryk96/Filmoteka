@@ -1,47 +1,26 @@
 import { refs } from './refs';
 
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
-function renderCards(images) {
-  const markup = images.map(createCard).join(' ');
-
-  refs.gallery.insertAdjacentHTML('beforeend', markup);
+function createCard(film) {
+  const { overview, title, poster_path, release_date, genre_ids } = film;
+  return ` <li class="contents__item">
+             ${
+               poster_path
+                 ? `<img src="https://image.tmdb.org/t/p/w500${poster_path}"`
+                 : `<img src="https://yt3.ggpht.com/AAKF_677TIvjFz_9xFF0R6PgiVd0kRpEtY6APSxSDRP65nXg8hkn9NFsz2bRd9_Z37DJ9D_b=s900-c-k-c0x00ffffff-no-rj"`
+             }
+             class="contents__img"
+             alt="${title}"
+             width="280"
+             loading="lazy"
+             />
+              <p class="contents__text"> ${title}</p>
+              <p class="contents__tag"> |${release_date.slice(0, 4)}</p>`;
 }
 
-const createCard = function (image) {
-  const {
-    webformatURL,
-    largeImageURL,
-    tags,
-    likes,
-    views,
-    comments,
-    downloads,
-  } = image;
+function renderCards(apiData) {
+  const markup = apiData.map(createCard).join('');
 
-  return `
-      <a href="${largeImageURL}">
-      <div class="photo-card">
-  <img src="${webformatURL}" alt="${tags}" loading="lazy" />
-  <div class="info">
-    <p class="info-item">
-      <b>Likes</b>
-      ${likes}
-    </p>
-    <p class="info-item">
-      <b>Views</b>
-      ${views}
-    </p>
-    <p class="info-item">
-      <b>Comments</b>
-      ${comments}
-    </p>
-    <p class="info-item">
-      <b>Downloads</b>
-      ${downloads}
-    </p>
-  </div>
-</div></a>`;
-};
+  refs.contentsList.insertAdjacentHTML('beforeend', markup);
+}
 
 export { renderCards };

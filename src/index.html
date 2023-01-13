@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
@@ -15,13 +15,12 @@
      <script src="./index.js" type="module"></script>
   </head>
     <body>
-         <!-- <include src="./partials/example.html"></include> -->
       <header class="header">
       <section class="section section--header">
         <div class="container container--header">
           <nav class="header-nav">
             <a href="./" class="logo"
-              ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.82 2H4.18A2.18 2.18 0 0 0 2 4.18v15.64A2.18 2.18 0 0 0 4.18 22h15.64A2.18 2.18 0 0 0 22 19.82V4.18A2.18 2.18 0 0 0 19.82 2ZM7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5"/></svg><span class="logo__text">Filmoteka </span></a
+              ><svg class="logo__svg""><use href="./images/sprite.svg#icon-logo"></use></svg><span class="logo__text">Filmoteka </span></a
             >
             <ul class="nav-page">
               <li class="nav-page__item"><a  class="nav-page__link nav-page__link--current" href="./index.html">home</a></li>
@@ -29,10 +28,17 @@
             </ul>
           </nav>
 
-          <div class="search">
+          <form class="search">
             <input type="text" class="search__input" placeholder="Movie search" />
-            <p class="search__text">Search result not successful. Enter the correct movie name and </p>
-          </div>
+            <button  class="search__btn" type="submit">
+              <svg class="search__svg">
+                <use  href="./images/sprite.svg#icon-search">
+                  </use>
+                </svg>
+              </button>
+            
+            <p class="search__text hidden">Search result not successful. Enter the correct movie name and </p>
+          </form>
 
         </div>
       </section>
@@ -40,23 +46,18 @@
       <main class="main">
         <section class="section section--review"><div class="container">
           <ul class="contents">
-            <li class="contents__item">
-              <!-- <img class="contents__img" src="" alt="" /> -->
-              <p class="contents__text"></p>
-              <p class="contents__tag"></p>
-            </li>
-          </ul>
+          </ul> -->
 
-          <!-- <ul class="paginate">
+<!-- <ul class="paginate">
           
           </ul> -->
-        </div></section>
+<!-- </div></section>
       </main>
       <footer class="footer">
         <div class="container">
           <ul class="footer-info">
             <li class="footer-info__item">
-              <p class="footer-info__text"><span>&#169</span> 2020 | All Rights Reserved |</p>
+              <p class="footer-info__text"><span> &#169 </span> 2020 | All Rights Reserved |</p>
             </li>
             <li class="footer-info__item">
               <p class="footer-info__text">Developed with</p>
@@ -68,4 +69,4 @@
         </div>
       </footer>
   </body>
-</html>
+</html> -->

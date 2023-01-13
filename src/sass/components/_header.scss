@@ -15,7 +15,10 @@
   justify-content: space-between;
   margin-bottom: 56px;
 }
-
+.logo__svg {
+  width: 20px;
+  height: 20px;
+}
 .logo__text {
   display: none;
   @media screen and (min-width: 768px) {
@@ -53,6 +56,7 @@
   margin-bottom: 16px;
   padding-bottom: 4px;
 
+  color: text(withe);
   font-weight: 400;
   font-size: 14px;
   line-height: 1.142;
@@ -70,4 +74,27 @@
   font-size: 14px;
   line-height: 1.142;
   color: text(_red);
+}
+
+.search {
+  position: relative;
+}
+
+.search__btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: transparent;
+}
+
+.search__svg {
+  width: 16px;
+  height: 16px;
+}
+
+.hidden {
+  display: none;
 }

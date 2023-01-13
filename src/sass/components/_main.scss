@@ -2,6 +2,10 @@
   padding-bottom: 51px;
 }
 .contents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
   padding-top: 21px;
   margin-bottom: 40px;
 }
@@ -9,4 +13,24 @@
 .paginate {
   display: flex;
   justify-content: center;
+}
+
+.contents__item {
+}
+
+.contents__img {
+  margin-bottom: 10px;
+}
+
+.contents__text {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
+}
+
+.contents__tag {
+  color: #ff6b08;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
 }

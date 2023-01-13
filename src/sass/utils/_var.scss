@@ -1,9 +1,10 @@
 $text-color: (
-  "black": #000000,
-  "yellow": #ff6b08,
-  "withe": #ffff,
-  "gray": #545454,
-  "_red": #ff001b,
+  'black': #000000,
+  'yellow': #ff6b08,
+  'withe': #ffff,
+  'gray': #545454,
+  '_red': #ff001b,
+  'body': #e5e5e5,
 );
 
 @function text($key) {
