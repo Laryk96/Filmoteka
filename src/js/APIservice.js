@@ -8,7 +8,7 @@ export default class ApiService {
   constructor() {
     this._paga = 1;
     this._search = localStorage.getItem(KEY_STORAGE);
-    this.counterImages = 0;
+    this.totalPage = 0;
   }
 
   getPopularFilms() {
@@ -22,7 +22,17 @@ export default class ApiService {
       .get(
         `${baseUrl}/3/search/movie?api_key=${API_KEY}&query=${this._search}&language=en-US&page=${this._paga}`
       )
-      .then(resalt => resalt.data.results);
+      .then(resalt => {
+        this.totalPage = resalt.data.total_pages;
+        return resalt.data.results;
+      });
+  }
+
+  getOptions() {
+    return {
+      page: this._paga,
+      allPage: this.totalPage,
+    };
   }
 
   incrementPage() {
