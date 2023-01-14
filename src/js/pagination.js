@@ -45,7 +45,6 @@ export default class Pagination {
       this.markup += `<li class="pagination__item ">${this._totalPages}</li>`;
       this.markup += `<li class="pagination__item pagination-item--btn increment"> <svg class="paginate-btn__icon"><use href="./images/sprite.svg#icon-arrow-right"></use></svg><li>`;
     }
-    debugger;
     this.renderPagination();
   }
   renderPagination() {
