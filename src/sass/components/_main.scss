@@ -67,13 +67,14 @@
   line-height: 1.333;
 }
 
-.paginate {
+.pagination {
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 40px;
 }
 
-.number {
+.pagination__item {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -84,17 +85,10 @@
   font-size: 12px;
   line-height: 1.333;
   border-radius: 5px;
-  &--active {
+
+  &b {
     background-color: #ff6b08;
   }
-}
-
-.paginate-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 100%;
 }
 
 .paginate-btn__icon {

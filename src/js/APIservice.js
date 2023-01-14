@@ -6,15 +6,18 @@ const baseUrl = 'https://api.themoviedb.org';
 
 export default class ApiService {
   constructor() {
-    this._paga = 1;
     this._search = localStorage.getItem(KEY_STORAGE);
-    this.totalPage = 0;
+    this._totalPage = 0;
+    this.paga = 5;
   }
 
   getPopularFilms() {
     return axios
       .get(`${baseUrl}/3/trending/movie/day?api_key=${API_KEY}`)
-      .then(resalt => resalt.data.results);
+      .then(resalt => {
+        this._totalPage = resalt.data.total_pages;
+        return resalt.data.results;
+      });
   }
 
   searchFilms() {
@@ -23,31 +26,19 @@ export default class ApiService {
         `${baseUrl}/3/search/movie?api_key=${API_KEY}&query=${this._search}&language=en-US&page=${this._paga}`
       )
       .then(resalt => {
-        this.totalPage = resalt.data.total_pages;
+        this._totalPage = resalt.data.total_pages;
         return resalt.data.results;
       });
   }
 
   getOptions() {
     return {
-      page: this._paga,
-      allPage: this.totalPage,
+      currentPage: this.paga,
+      totalPages: this._totalPage,
     };
   }
 
-  incrementPage() {
-    this._page += 1;
-  }
-
-  decementPage() {
-    this._page -= 1;
-  }
-
-  set page(targetPage) {
-    this._paga = targetPage;
-  }
-
-  resetPage() {
-    this._page = 1;
+  get totalPage() {
+    return this._totalPage;
   }
 }
