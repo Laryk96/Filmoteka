@@ -8,7 +8,7 @@ export default class ApiService {
   constructor() {
     this._search = localStorage.getItem(KEY_STORAGE);
     this._totalPage = 0;
-    this.paga = 5;
+    this.paga = 1;
   }
 
   getPopularFilms() {
