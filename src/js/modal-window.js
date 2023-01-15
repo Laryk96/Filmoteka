@@ -11,7 +11,7 @@ function openModal(event) {
   updateModal(film);
 
   refs.backdrop.classList.remove('is-hidden');
-  console.log(refs.backdrop);
+
   closeModal();
 }
 function closeModal() {

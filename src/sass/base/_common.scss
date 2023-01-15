@@ -6,6 +6,10 @@ body {
 
 main {
   background-color: #e5e5e5;
+
+  &.dark-theme {
+    background-color: #1e2025;
+  }
 }
 
 h1,

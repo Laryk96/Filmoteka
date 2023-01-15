@@ -1,4 +1,5 @@
 const refs = {
+  maim: document.querySelector('main'),
   contentsList: document.querySelector('.gallery'),
   searchInput: document.querySelector('.search__input'),
   form: document.querySelector('.search'),
@@ -14,6 +15,7 @@ const refs = {
   modalOverview: document.querySelector('.overview'),
   modalContainer: document.querySelector('.modal__container'),
   modalImgBox: document.querySelector('.left-box'),
+  toggleThemeBtn: document.querySelector('.user-tools__btn--toggle'),
 };
 
 export { refs };

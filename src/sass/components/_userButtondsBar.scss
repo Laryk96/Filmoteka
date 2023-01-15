@@ -15,6 +15,14 @@
 
   &:hover {
     cursor: pointer;
+    fill: #ff6b08;
+  }
+
+  main.dark-theme & {
+    fill: #fff;
+    &:hover {
+      fill: #ff6b08;
+    }
   }
 }
 

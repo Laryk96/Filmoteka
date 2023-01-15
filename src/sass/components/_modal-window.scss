@@ -29,6 +29,10 @@
   transform: translate(-50%, -50%);
 
   background: #ffffff;
+
+  main.dark-theme & {
+    background-color: #1e2025;
+  }
 }
 
 .modal__close {
@@ -38,12 +42,20 @@
 
   background-color: transparent;
   border: none;
+
+  main.dark-theme & {
+    fill: #fff;
+  }
 }
 
 .modal__container {
   display: flex;
   // justify-content: space-between;
   padding: 40px 12px;
+
+  main.dark-theme & {
+    color: #fff;
+  }
 }
 
 .modal__img {
@@ -91,6 +103,11 @@
   }
 }
 
+.modal__item-value {
+  main.dark-theme & {
+    color: #fff;
+  }
+}
 .modal__item-value--rating {
   padding: 1px 10px;
 
@@ -125,6 +142,11 @@
   .modal__btn--to-queue {
     border: 1px solid #000000;
     background-color: transparent;
+
+    main.dark-theme & {
+      color: #fff;
+      border-color: #fff;
+    }
   }
 }
 

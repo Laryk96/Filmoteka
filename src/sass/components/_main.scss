@@ -71,6 +71,10 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.333;
+
+  main.dark-theme & {
+    color: #fff;
+  }
 }
 
 .contents__tag {
@@ -85,6 +89,10 @@
   align-items: center;
   justify-content: center;
   height: 40px;
+
+  main.dark-theme & {
+    color: #fff;
+  }
 }
 
 .pagination__item {
@@ -108,8 +116,11 @@
 .paginate-btn__icon {
   width: 15px;
   height: 15px;
-  color: black;
 
   fill: rgba(0, 0, 0, 0);
   stroke: currentColor;
+
+  main.dark-theme & {
+    color: #fff;
+  }
 }
