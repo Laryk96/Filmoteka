@@ -1,0 +1,83 @@
+.container {
+}
+.user-tools__list {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 8px;
+}
+.user-tools__item {
+  padding-top: 5px;
+}
+.user-tools__btn {
+  border: none;
+  background-color: transparent;
+}
+
+.user-tools__btn--menu {
+}
+.user-tools__icon {
+  --menu {
+    transform-style: preserve-3d;
+
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    .btn-menu.is-open & {
+      transform: rotateY(-180deg);
+      position: relative;
+      right: 0;
+    }
+  }
+}
+
+.user-tools__icon--menu {
+  transform-style: preserve-3d;
+
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  .user-tools__btn--menu.is-open & {
+    transform: rotateY(-180deg);
+    position: relative;
+    right: 0;
+  }
+}
+
+.menu-close {
+  height: 100%;
+  display: none;
+
+  .user-tools__btn--menu.is-open & {
+    display: block;
+  }
+}
+
+.menu-open {
+  height: 100%;
+  transform: rotateY(0deg);
+
+  .user-tools__btn--menu.is-open & {
+    display: none;
+  }
+}
+
+.light {
+}
+
+.dark {
+}
+.user-tools__btn--toggle {
+  display: inline-flex;
+}
+.menu {
+}
+.close {
+}
+.backdrop {
+}
+.backdrop--tools {
+}
+.is {
+}
+.hidden {
+}
+.modal {
+}

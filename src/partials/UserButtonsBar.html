@@ -1,0 +1,50 @@
+<div class="container">
+  <ul class="user-tools__list">
+    <li class="user-tools__item">
+      <button class="user-tools__btn">
+        <svg width="40" height="40" class="user-tools__icon">
+          <use
+            width="36"
+            class="light current"
+            href="./images/sprite.svg#icon-user-login"
+          ></use>
+        </svg>
+      </button>
+    </li>
+    <li class="user-tools__item">
+      <button class="user-tools__btn user-tools__btn--toggle">
+        <svg width="40" height="40" class="user-tools__icon">
+          <use
+            class="sun"
+            width="32"
+            href="./images/sprite.svg#icon-sun-"
+          ></use>
+          <use
+            class="moon hidden"
+            width="32"
+            href="./images/sprite.svg#icon-moon"
+          ></use>
+        </svg>
+      </button>
+    </li>
+    <li class="user-tools__item">
+      <button class="user-tools__btn user-tools__btn--menu">
+        <svg
+          width="40"
+          height="40"
+          class="user-tools__icon user-tools__icon--menu"
+          aria-label="переключатель меню авторизации"
+        >
+          <use class="menu-open" href="./images/sprite.svg#icon-menu"></use>
+          <use
+            class="menu-close"
+            href="./images/sprite.svg#icon-closeSecond"
+          ></use>
+        </svg>
+      </button>
+    </li>
+  </ul>
+</div>
+<div class="backdrop backdrop--tools is hidden">
+  <div class="modal"></div>
+</div>
