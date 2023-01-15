@@ -1,5 +1,6 @@
 import ApiService from './js/APIservice';
 import Pagination from './js/pagination';
+// import SimpleLightbox from 'simplelightbox';
 import { getAllTags } from './js/getTags';
 import { renderCards } from './js/renderCards';
 import { refs } from './js/refs';
@@ -8,10 +9,12 @@ import Notiflix from 'notiflix';
 const apiService = new ApiService();
 const pagination = new Pagination(apiService.getOptionsPage());
 const KEY_STORAGE = 'search';
+const KEY_STORAGE_FILMS = 'films';
 getAllTags();
 
 refs.form.addEventListener('submit', onSubmitForm);
 refs.paginationList.addEventListener('click', onClickBtn);
+refs.contentsList.addEventListener('click', openModal);
 apiService.getPopularFilms().then(films => {
   const pagination = new Pagination(apiService.getOptionsPage());
 
@@ -29,6 +32,7 @@ function onSubmitForm(event) {
   }
   localStorage.setItem(KEY_STORAGE, inputSearch);
   search();
+
   event.currentTarget.reset();
 }
 
@@ -83,19 +87,34 @@ function onClickBtn(event) {
   });
 }
 
-// const tags = apiService.getGenres();
-// tags.then(result => {
-//   console.log(result);
-// });
-// const film = apiService.getFilmsById(315162);
+function openModal(event) {
+  event.preventDefault();
 
-// film.then(console.log);
+  const targetEl = Number(event.target.closest('li').dataset.id);
+  const data = JSON.parse(localStorage.getItem(KEY_STORAGE_FILMS));
 
-// console.log(getTagsbyId(12).then(console.log));
+  const film = getFilmOfStorage(data, targetEl);
+  updateModal(film);
 
-// async function getAllTags() {
-//   const tags = await apiService.getGenres();
+  refs.backdrop.classList.remove('is-hidden');
+}
 
-// }
+function getFilmOfStorage(films, id) {
+  for (film of films) {
+    if (film.id === id) {
+      return film;
+    }
+  }
+}
 
-// getTagsById();
+function updateModal(film) {
+  const { original_title, tags, popularity, vote_average, overview } = film;
+
+  console.log(overview);
+  console.log(refs.modalOverview);
+  refs.modalPopular.textContent = popularity;
+  refs.modalTitle.textContent = original_title;
+  refs.modalRaiting.textContent = vote_average;
+  refs.modalOverview.textContent = overview;
+  //   refs.modalTags.textContent = tags;
+}

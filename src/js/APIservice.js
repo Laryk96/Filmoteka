@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_KEY = 'b1cb6bb9f0fb8b16da0ef0bac91fc5ae';
 const KEY_STORAGE = 'search';
 const BASE_URL = 'https://api.themoviedb.org';
-
+const KEY_STORAGE_FILMS = 'films';
 export default class ApiService {
   constructor() {
     this._search = localStorage.getItem(KEY_STORAGE);
@@ -16,6 +16,11 @@ export default class ApiService {
       .get(`${BASE_URL}/3/trending/movie/day?api_key=${API_KEY}`)
       .then(resalt => {
         this._totalPage = resalt.data.total_pages;
+
+        localStorage.setItem(
+          KEY_STORAGE_FILMS,
+          JSON.stringify(resalt.data.results)
+        );
         return resalt.data.results;
       });
   }

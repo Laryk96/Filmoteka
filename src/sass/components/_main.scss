@@ -1,7 +1,7 @@
 .section--review {
   padding-bottom: 51px;
 }
-.contents {
+.gallery {
   @media screen and (max-width: 767px) {
     display: flex;
     flex-direction: column;
@@ -35,6 +35,7 @@
 }
 
 .contents__item {
+  z-index: 1;
   @media screen and (min-width: 1280px) {
     margin-bottom: 16px;
     padding-bottom: 41px;

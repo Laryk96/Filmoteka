@@ -6,12 +6,11 @@ function createCard(film) {
 
   const tags = getTags(genre_ids);
 
-  return ` <li id=${id} class="contents__item">
-             ${
-               poster_path
-                 ? `<img src="https://image.tmdb.org/t/p/w500${poster_path}"`
-                 : `<img src="https://yt3.ggpht.com/AAKF_677TIvjFz_9xFF0R6PgiVd0kRpEtY6APSxSDRP65nXg8hkn9NFsz2bRd9_Z37DJ9D_b=s900-c-k-c0x00ffffff-no-rj"`
-             }
+  return ` <li data-id="${id}" class="contents__item"><a href="${overview}">${
+    poster_path
+      ? `<img src="https://image.tmdb.org/t/p/w500${poster_path}"`
+      : `<img src="https://yt3.ggpht.com/AAKF_677TIvjFz_9xFF0R6PgiVd0kRpEtY6APSxSDRP65nXg8hkn9NFsz2bRd9_Z37DJ9D_b=s900-c-k-c0x00ffffff-no-rj"`
+  }
              class="contents__img"
              alt="${title}"
              width="280"
@@ -21,13 +20,13 @@ function createCard(film) {
               <p class="contents__tag">${tags} | ${release_date.slice(
     0,
     4
-  )}</p>`;
+  )}</p></a></li>`;
 }
 
 function renderCards(apiData) {
   const markup = apiData.map(createCard).join('');
 
-  refs.contentsList.insertAdjacentHTML('beforeend', markup);
+  refs.contentsList.innerHTML = markup;
 }
 
 export { renderCards };
