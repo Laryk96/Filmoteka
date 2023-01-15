@@ -12,6 +12,10 @@
 .user-tools__btn {
   border: none;
   background-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .user-tools__btn--menu {

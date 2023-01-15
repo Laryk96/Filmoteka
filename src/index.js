@@ -1,20 +1,23 @@
+import Notiflix from 'notiflix';
+
 import ApiService from './js/APIservice';
 import Pagination from './js/pagination';
-// import SimpleLightbox from 'simplelightbox';
+
+import './js/colorTheme';
+import './js/modal-window';
+
 import { getAllTags } from './js/getTags';
 import { renderCards } from './js/renderCards';
 import { refs } from './js/refs';
-import Notiflix from 'notiflix';
 
 const apiService = new ApiService();
 const pagination = new Pagination(apiService.getOptionsPage());
 const KEY_STORAGE = 'search';
-const KEY_STORAGE_FILMS = 'films';
+
 getAllTags();
 
 refs.form.addEventListener('submit', onSubmitForm);
-refs.paginationList.addEventListener('click', onClickBtn);
-refs.contentsList.addEventListener('click', openModal);
+
 apiService.getPopularFilms().then(films => {
   const pagination = new Pagination(apiService.getOptionsPage());
 
@@ -22,6 +25,8 @@ apiService.getPopularFilms().then(films => {
   pagination.createPagination();
 });
 
+// PAGINATION
+refs.paginationList.addEventListener('click', onClickBtn);
 function onSubmitForm(event) {
   event.preventDefault();
 
@@ -82,69 +87,4 @@ function onClickBtn(event) {
 
     pagination.createPagination();
   });
-}
-
-function openModal(event) {
-  event.preventDefault();
-  const targetEl = Number(event.target.closest('li').dataset.id);
-  const data = JSON.parse(localStorage.getItem(KEY_STORAGE_FILMS));
-
-  const film = getFilmOfStorage(data, targetEl);
-  updateModal(film);
-
-  refs.backdrop.classList.remove('is-hidden');
-  console.log(refs.backdrop);
-  closeModal();
-}
-
-function closeModal() {
-  refs.backdrop.addEventListener('click', event => {
-    document.querySelector('body').addEventListener('keydown', e => {
-      if (e.code === 'escape') {
-        refs.backdrop.classList.add('is-hidden');
-      }
-    });
-    if (
-      event.target.classList.contains('modal__close') ||
-      event.target.nodeName === 'svg' ||
-      event.target.nodeName === 'use' ||
-      event.target.classList.contains('backdrop')
-    ) {
-      refs.backdrop.classList.add('is-hidden');
-    }
-  });
-}
-
-function getFilmOfStorage(films, id) {
-  for (film of films) {
-    if (film.id === id) {
-      return film;
-    }
-  }
-}
-
-function updateModal(film) {
-  const {
-    original_title,
-    poster_path,
-    tags,
-    popularity,
-    vote_average,
-    overview,
-  } = film;
-
-  const img = `<img src="https://image.tmdb.org/t/p/w500${poster_path}"
-   class="contents__img"
-          alt=""
-          width="280"
-          loading="lazy"/>`;
-
-  refs.modalImgBox.innerHTML = '';
-  refs.modalImgBox.insertAdjacentHTML('afterbegin', img);
-  refs.modalPopular.textContent = popularity;
-  refs.modalTitle.textContent = original_title;
-  refs.modalRaiting.textContent = vote_average;
-  refs.modalOverview.textContent = overview;
-
-  //   refs.modalTags.textContent = tags;
 }
