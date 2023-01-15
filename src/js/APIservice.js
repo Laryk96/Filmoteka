@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_KEY = 'b1cb6bb9f0fb8b16da0ef0bac91fc5ae';
 const KEY_STORAGE = 'search';
-const baseUrl = 'https://api.themoviedb.org';
+const BASE_URL = 'https://api.themoviedb.org';
 
 export default class ApiService {
   constructor() {
@@ -13,17 +13,17 @@ export default class ApiService {
 
   getPopularFilms() {
     return axios
-      .get(`${baseUrl}/3/trending/movie/day?api_key=${API_KEY}`)
+      .get(`${BASE_URL}/3/trending/movie/day?api_key=${API_KEY}`)
       .then(resalt => {
         this._totalPage = resalt.data.total_pages;
         return resalt.data.results;
       });
   }
 
-  searchFilms() {
+  getFilms() {
     return axios
       .get(
-        `${baseUrl}/3/search/movie?api_key=${API_KEY}&query=${this._search}&language=en-US&page=${this._paga}`
+        `${BASE_URL}/3/search/movie?api_key=${API_KEY}&query=${this._search}&language=en-US&page=${this._paga}`
       )
       .then(resalt => {
         this._totalPage = resalt.data.total_pages;
@@ -31,7 +31,18 @@ export default class ApiService {
       });
   }
 
-  getOptions() {
+  getFilmsById(id) {
+    const url = `${BASE_URL}/3/movie/${id}?api_key=${API_KEY}&language=en-US`;
+
+    return axios.get(url).then(result => result.data);
+  }
+
+  getGenres() {
+    const url = `${BASE_URL}/3/genre/movie/list?api_key=${API_KEY}&language=en-US`;
+    return axios.get(url).then(result => result.data.genres);
+  }
+
+  getOptionsPage() {
     return {
       currentPage: this.paga,
       totalPages: this._totalPage,
@@ -42,3 +53,27 @@ export default class ApiService {
     return this._totalPage;
   }
 }
+
+// async getPopularFilms() {
+//   return await axios
+//     .get(`${BASE_URL}/3/trending/movie/day?api_key=${API_KEY}`)
+//     .then(resalt => {
+//       this._totalPage = resalt.data.total_pages;
+
+//       const films = resalt.data.results;
+
+//       const updateFilms = films.map(film => {
+//         const url = `${BASE_URL}/3/movie/${film.id}?api_key=${API_KEY}&language=en-US`;
+//         const tags = [];
+//         axios.get(url).then(result => {
+//           tags.push(...result.data.genres);
+//         });
+//         return {
+//           ...film,
+//           tags,
+//         };
+//       });
+//       // console.log(updateFilms);
+//       return updateFilms;
+//     });
+// }

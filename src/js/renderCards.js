@@ -1,8 +1,12 @@
 import { refs } from './refs';
+import { getTags } from './getTags';
 
 function createCard(film) {
-  const { overview, title, poster_path, release_date, genre_ids } = film;
-  return ` <li class="contents__item">
+  const { overview, title, poster_path, release_date, genre_ids, id } = film;
+
+  const tags = getTags(genre_ids);
+
+  return ` <li id=${id} class="contents__item">
              ${
                poster_path
                  ? `<img src="https://image.tmdb.org/t/p/w500${poster_path}"`
@@ -14,7 +18,10 @@ function createCard(film) {
              loading="lazy"
              />
               <p class="contents__text"> ${title}</p>
-              <p class="contents__tag"> |${release_date.slice(0, 4)}</p>`;
+              <p class="contents__tag">${tags} | ${release_date.slice(
+    0,
+    4
+  )}</p>`;
 }
 
 function renderCards(apiData) {
