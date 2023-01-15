@@ -127,11 +127,27 @@ function getFilmOfStorage(films, id) {
 }
 
 function updateModal(film) {
-  const { original_title, tags, popularity, vote_average, overview } = film;
+  const {
+    original_title,
+    poster_path,
+    tags,
+    popularity,
+    vote_average,
+    overview,
+  } = film;
 
+  const img = `<img src="https://image.tmdb.org/t/p/w500${poster_path}"
+   class="contents__img"
+          alt=""
+          width="280"
+          loading="lazy"/>`;
+
+  refs.modalImgBox.innerHTML = '';
+  refs.modalImgBox.insertAdjacentHTML('afterbegin', img);
   refs.modalPopular.textContent = popularity;
   refs.modalTitle.textContent = original_title;
   refs.modalRaiting.textContent = vote_average;
   refs.modalOverview.textContent = overview;
+
   //   refs.modalTags.textContent = tags;
 }

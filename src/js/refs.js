@@ -12,6 +12,8 @@ const refs = {
   modalRaiting: document.querySelector('.vote_average'),
   modalTitle: document.querySelector('.original_title'),
   modalOverview: document.querySelector('.overview'),
+  modalContainer: document.querySelector('.modal__container'),
+  modalImgBox: document.querySelector('.left-box'),
 };
 
 export { refs };
