@@ -5,6 +5,7 @@ import Pagination from './js/pagination';
 
 import './js/colorTheme';
 import './js/modal-window';
+import './js/scrollToTo[';
 
 import { getAllTags } from './js/getTags';
 import { renderCards } from './js/renderCards';
