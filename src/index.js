@@ -86,7 +86,6 @@ function onClickBtn(event) {
 
 function openModal(event) {
   event.preventDefault();
-
   const targetEl = Number(event.target.closest('li').dataset.id);
   const data = JSON.parse(localStorage.getItem(KEY_STORAGE_FILMS));
 
@@ -94,10 +93,8 @@ function openModal(event) {
   updateModal(film);
 
   refs.backdrop.classList.remove('is-hidden');
-
+  console.log(refs.backdrop);
   closeModal();
-
-  // if(event.currentTarget)
 }
 
 function closeModal() {
