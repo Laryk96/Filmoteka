@@ -49,7 +49,6 @@ function search() {
 
       refs.contentsList.innerHTML = '';
       renderCards(films);
-      console.log(apiService.getOptionsPage());
       const pagination = new Pagination(apiService.getOptionsPage());
       pagination._totalPages = apiService.getOptionsPage().totalPages;
       pagination.createPagination();
@@ -61,7 +60,6 @@ function search() {
 
 function onClickBtn(event) {
   event.preventDefault();
-  console.log();
   if (
     !event.target.hasAttribute('data-page') ||
     !event.target.nodeName === 'svg'
@@ -78,12 +76,11 @@ function onClickBtn(event) {
     refs.contentsList.innerHTML = '';
     renderCards(films);
     // const pagination = new Pagination(apiService.getOptionsPage());
-    console.log(apiService._paga);
+
     pagination.__currentPage = apiService._paga;
     pagination._totalPages = apiService.getOptionsPage().totalPages;
 
     pagination.createPagination();
-    console.log(pagination.__currentPage);
   });
 }
 
@@ -97,6 +94,28 @@ function openModal(event) {
   updateModal(film);
 
   refs.backdrop.classList.remove('is-hidden');
+
+  closeModal();
+
+  // if(event.currentTarget)
+}
+
+function closeModal() {
+  refs.backdrop.addEventListener('click', event => {
+    document.querySelector('body').addEventListener('keydown', e => {
+      if (e.code === 'escape') {
+        refs.backdrop.classList.add('is-hidden');
+      }
+    });
+    if (
+      event.target.classList.contains('modal__close') ||
+      event.target.nodeName === 'svg' ||
+      event.target.nodeName === 'use' ||
+      event.target.classList.contains('backdrop')
+    ) {
+      refs.backdrop.classList.add('is-hidden');
+    }
+  });
 }
 
 function getFilmOfStorage(films, id) {
@@ -110,8 +129,6 @@ function getFilmOfStorage(films, id) {
 function updateModal(film) {
   const { original_title, tags, popularity, vote_average, overview } = film;
 
-  console.log(overview);
-  console.log(refs.modalOverview);
   refs.modalPopular.textContent = popularity;
   refs.modalTitle.textContent = original_title;
   refs.modalRaiting.textContent = vote_average;

@@ -1,13 +1,28 @@
 .section--review {
   padding-bottom: 51px;
 }
+
+.container--main {
+  @media screen and (max-width: 767px) {
+    padding-top: 21px;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    padding-top: 60px;
+    padding-top: 60px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    padding-top: 60px;
+  }
+}
 .gallery {
   @media screen and (max-width: 767px) {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    padding-top: 21px;
+
     margin-bottom: 40px;
   }
 
@@ -16,8 +31,6 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 32px;
-    padding-top: 60px;
-    padding-top: 60px;
   }
 
   @media screen and (min-width: 1280px) {
@@ -25,7 +38,6 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 16px;
-    padding-top: 60px;
   }
 }
 
