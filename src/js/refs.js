@@ -17,6 +17,9 @@ const refs = {
   modalImgBox: document.querySelector('.left-box'),
   toggleThemeBtn: document.querySelector('.user-tools__btn--toggle'),
   scrollToTop: document.querySelector('.fix-wrapper'),
+  btnListModal: document.querySelector('.modal__btn-list'),
+  addWatch: document.querySelector('.modal__btn--to-watched'),
+  addQueue: document.querySelector('.modal__btn--to-queue'),
 };
 
 export { refs };

@@ -8,31 +8,30 @@ async function getAllTags() {
   localStorage.setItem(KEY_STORAGE_TAGS, JSON.stringify(tags));
 }
 
-function getTags(tagsId) {
+function getTagsById(tagsId) {
   const tags = JSON.parse(localStorage.getItem(KEY_STORAGE_TAGS));
   let tagsString = '';
 
   for (const id of tagsId) {
     tags.forEach(tag => {
       if (tag.id === id) {
-        tagsString += tag.name + ' ';
+        tagsString += ' ' + tag.name;
       }
     });
   }
-
-  return checkTags(tagsString);
+  return tagsString.split(' ').slice(1).join(', ');
 }
 
 function checkTags(tags) {
   const tagsWords = tags.split(' ').slice(0, tags.length - 1);
 
-  if (tags.length < 25 || tagsWords.length > 5) {
+  if (tags.length > 25 || tagsWords.length > 5) {
     const updateText = tagsWords.slice(0, 2);
     updateText.push('Other');
-    return updateText.join(', ');
+    return updateText.join('');
   }
 
-  return tagsWords.slice(0, tagsWords.length - 1).join(', ');
+  return tags;
 }
 
-export { getAllTags, getTags };
+export { getAllTags, checkTags, getTagsById };

@@ -1,10 +1,10 @@
 import { refs } from './refs';
-import { getTags } from './getTags';
+import { getTagsById, checkTags } from './getTags';
 
 function createCard(film) {
   const { overview, title, poster_path, release_date, genre_ids, id } = film;
 
-  const tags = getTags(genre_ids);
+  const tags = checkTags(getTagsById(genre_ids));
 
   return ` <li data-id="${id}" class="contents__item"><a href="./">${
     poster_path
@@ -25,9 +25,9 @@ function createCard(film) {
 }
 
 function renderCards(apiData) {
-  const markup = apiData.map(createCard).join('');
+  const markup = apiData.map(createCard).join(', ');
 
   refs.contentsList.innerHTML = markup;
 }
 
-export { renderCards };
+export { renderCards, createCard };
