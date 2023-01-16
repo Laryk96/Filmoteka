@@ -1,11 +1,10 @@
-.section--header {
+.header {
   height: 230px;
 
   background-size: cover;
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
     url(../images/mobail-main@1x.jpg);
 }
-// linear-gradient(0, 0, 0, 0.56),
 .header__content {
 }
 
@@ -62,6 +61,10 @@
     height: 3px;
 
     background-color: text(_red);
+  }
+
+  &:hover {
+    color: text(_red);
   }
 }
 .search__input {

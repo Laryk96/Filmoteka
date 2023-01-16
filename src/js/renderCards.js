@@ -16,11 +16,12 @@ function createCard(film) {
              width="280"
              loading="lazy"
              />
-              <p class="contents__text"> ${title}</p>
+             <div class="wrapper-text"><p class="contents__text"> ${title}</p>
               <p class="contents__tag">${tags} | ${release_date.slice(
     0,
     4
-  )}</p></a></li>`;
+  )}</p></div>
+              </a></li>`;
 }
 
 function renderCards(apiData) {

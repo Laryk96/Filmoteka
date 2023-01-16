@@ -1,0 +1,40 @@
+.change-liset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.change-btn__item {
+  height: 42px;
+  min-width: 148px;
+}
+.change-btn {
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
+
+  text-transform: uppercase;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &--current {
+    background-color: #ff6b01;
+
+    border: none;
+  }
+
+  &:hover {
+    border-color: #ff6b01;
+    color: #ff6b01;
+  }
+}
+.change-btn--watched {
+}
+.change-btn-queue {
+}
