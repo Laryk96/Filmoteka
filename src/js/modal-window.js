@@ -2,10 +2,11 @@ import { refs } from './refs';
 import { getTagsById } from './getTags';
 import { renderCards, createCard } from './renderCards';
 const KEY_STORAGE_FILMS = 'films';
-const KEY_TO_WATHED = 'Wathed-List';
 const KEY_FOR_QUEUE = 'Queue-List';
+const KEY_TO_WATHED = 'Wathed-List';
 const KEY_CURRENT_ID = 'current-ID';
-
+const watchedFilms = [];
+const queueFilms = [];
 refs.contentsList.addEventListener('click', openModal);
 
 function openModal(event) {
@@ -15,19 +16,24 @@ function openModal(event) {
   const targetEl = Number(event.target.closest('li').dataset.id);
   const data = JSON.parse(localStorage.getItem(KEY_STORAGE_FILMS));
 
-  const film = getFilmOfStorage(data, targetEl);
-  updateModal(film);
+  const film = getFilmOfStorageById(data, targetEl);
+
   localStorage.setItem(KEY_CURRENT_ID, JSON.stringify(film.id));
-  handleBtnClick();
+  refs.btnListModal.addEventListener('click', createWatchedList);
+  updateModal(film);
   closeModal();
 }
+
 function closeModal() {
+  removeEventListener('click', createWatchedList);
+
+  document.querySelector('body').addEventListener('keydown', e => {
+    if (e.code === 'Escape') {
+      refs.backdrop.classList.add('is-hidden');
+    }
+  });
+
   refs.backdrop.addEventListener('click', event => {
-    document.querySelector('body').addEventListener('keydown', e => {
-      if (e.code === 'escape') {
-        refs.backdrop.classList.add('is-hidden');
-      }
-    });
     if (
       event.target.classList.contains('modal__close') ||
       event.target.nodeName === 'svg' ||
@@ -38,7 +44,8 @@ function closeModal() {
     }
   });
 }
-function getFilmOfStorage(films, id) {
+
+function getFilmOfStorageById(films, id) {
   for (film of films) {
     if (film.id === id) {
       return film;
@@ -68,58 +75,102 @@ function updateModal(film) {
 
   refs.modalImgBox.innerHTML = '';
   refs.modalImgBox.insertAdjacentHTML('afterbegin', img);
-  refs.modalPopular.textContent = popularity;
-  refs.modalTitle.textContent = original_title;
-  refs.modalRaiting.textContent = vote_average;
-  refs.modalOverview.textContent = overview;
-  refs.modalTags.textContent = genre;
+  refs.modalPopular.innerHTML = popularity;
+  refs.modalTitle.innerHTML = original_title;
+  refs.modalRaiting.innerHTML = vote_average;
+  refs.modalOverview.innerHTML = overview;
+  refs.modalTags.innerHTML = genre;
 }
 
-function handleBtnClick() {
-  refs.btnListModal.addEventListener('click', addFilmsInList);
-}
-
-function addFilmsInList(event) {
-  const targetBtn = event.target.dataset.list;
+function createWatchedList(event) {
+   const targetBtn = event.target.dataset.list;
   const targetID = Number(localStorage.getItem(KEY_CURRENT_ID));
-  const data = JSON.parse(localStorage.getItem(KEY_STORAGE_FILMS));
-  const film = getFilmOfStorage(data, targetID);
+
+  const films = JSON.parse(localStorage.getItem(KEY_STORAGE_FILMS));
+  const targetFilm = getFilmOfStorageById(films, targetID);
+
+  const wathedFilmId = watchedFilms.findIndex(film => film.id === targetID);
+  const queueFilmId = queueFilms.findIndex(film => film.id === targetID);
+
 
   switch (targetBtn) {
+  
     case 'watched': {
-      const result = pushStorage(KEY_TO_WATHED, film);
-
-      if (result === '') {
-        refs.addWatch.textContent = 'REMOVE';
-      } else {
+      console.log(wathedFilmId);
+      if (wathedFilmId !== -1) {
         refs.addWatch.textContent = 'ADD TO WATCHED';
-
-        renderCardForLib(JSON.parse(result));
-      }
-
+        
+         watchedFilms.splice(wathedFilmId, 1);
+        localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
       break;
-    }
-    case 'queue': {
-      const result = pushStorage(KEY_FOR_QUEUE, film);
-
-      if (result !== '') {
-        refs.addQueue.textContent = 'REMOVE';
-      } else {
-        refs.addQueue.textContent = 'ADD TO QUEUE';
       }
+    
+      refs.addWatch.textContent = 'REMOVE';
+
+      watchedFilms.push(targetFilm);
+    localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
+    break;
     }
-  }
+      
+    case 'queue': {
+      if (queueFilmId !== -1) {
+        refs.addQueue.textContent = 'ADD TO QUEUE';
+    
+        queueFilms.splice(queueFilmId, 1);
+        localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
+      break;
+      }
+
+      refs.addQueue.textContent = 'REMOVE';
+      refs.addQueue.style.backgroundColor = "#ff6b01";
+      refs.addQueue.style.border = "none";
+      refs.addQueue.style.color = "#ffff";
+      
+      queueFilms.push(targetFilm);
+      localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
+    break;
+    }
+    // case "queue": {
+    //   if (queueFilmId !== -1) {
+          
+    //     refs.addQueue.textContent = 'ADD TO QUEUE';
+    //     refs.addQueue.style.backgroundColor = "#ff6b01";
+
+
+    //   queueFilms.splice(removeById, 1);
+    //   localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
+    //   break;
+    //   }
+      
+    //   refs.addQueue.textContent = "REMOVE";
+    //   refs.addQueue.style.backgroundColor = "#ff6b01";
+    //   refs.addQueue.style.border = "none";
+    //   refs.addQueue.style.color = "#ffff";
+      
+      
+    //   queueFilms.push(targetFilm);
+    // localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
+    // break;
+    //   }
+
 }
 
-function pushStorage(key, film) {
-  localStorage.getItem(key)
-    ? localStorage.setItem(key, '')
-    : localStorage.setItem(key, JSON.stringify(film));
+// function renderCardForLib(film) {
+//   const markup = createCard(film);
+// }
 
-  return localStorage.getItem(key);
-}
+// function pushStorage(key, film) {
+//   localStorage.getItem(key)
+//     ? localStorage.setItem(key, '')
+//     : localStorage.setItem(key, JSON.stringify(film));
 
-function renderCardForLib(film) {
-  console.log(film);
-  const markup = createCard(film);
-}
+//   return localStorage.getItem(key);
+// }
+
+// function handleBtnClick() {}
+
+// function updateStorage() {
+//   localStorage.getItem(KEY_TO_WATHED) !== null
+//     ? localStorage.getItem(KEY_TO_WATHED)
+//     : localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
+// }

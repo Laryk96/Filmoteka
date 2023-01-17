@@ -20,6 +20,13 @@ const refs = {
   btnListModal: document.querySelector('.modal__btn-list'),
   addWatch: document.querySelector('.modal__btn--to-watched'),
   addQueue: document.querySelector('.modal__btn--to-queue'),
+  myLibrary: document.querySelector('.library'),
+  watchedLibraryBrn: document.querySelector('.change-btn--watched'),
+  queueLibraryBrn: document.querySelector('.change-btn-queue'),
+  changeListLib: document.querySelector('.change-liset'),
+  sortMenu: document.querySelector('.user-tools__btn--menu'),
+  tagsMenu: document.querySelector('.menu-tags'),
+  tagsList: document.querySelector('.menu-tags__list'),
 };
 
 export { refs };

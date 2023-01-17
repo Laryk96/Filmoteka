@@ -32,6 +32,7 @@
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
+  visibility: visible;
 
   transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
   main.dark-theme & {
@@ -40,6 +41,7 @@
 
   .backdrop.is-hidden & {
     transform: translate(-50%, 200%) scale(0.1);
+    visibility: hidden;
   }
 }
 
@@ -166,6 +168,7 @@
   font-size: 12px;
   line-height: 1.333;
   border-radius: 5px;
+  text-transform: uppercase;
 }
 
 .param {

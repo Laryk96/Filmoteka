@@ -23,10 +23,13 @@
   border-radius: 5px;
   cursor: pointer;
 
-  &--current {
+  &.current {
     background-color: #ff6b01;
 
     border: none;
+    &:hover {
+      color: black;
+    }
   }
 
   &:hover {

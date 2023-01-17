@@ -25,7 +25,7 @@ function createCard(film) {
 }
 
 function renderCards(apiData) {
-  const markup = apiData.map(createCard).join(', ');
+  const markup = apiData.map(createCard).join('');
 
   refs.contentsList.innerHTML = markup;
 }

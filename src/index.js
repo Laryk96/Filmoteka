@@ -7,6 +7,7 @@ import './js/colorTheme';
 import './js/modal-window';
 import './js/scrollToTo';
 import './js/local-storage';
+import './js/sortMenu';
 
 import { getAllTags } from './js/getTags';
 import { renderCards } from './js/renderCards';
@@ -90,3 +91,7 @@ function onClickBtn(event) {
     pagination.createPagination();
   });
 }
+
+refs.myLibrary.addEventListener('click', event => {
+  console.log('xxx');
+});

@@ -6,6 +6,8 @@ async function getAllTags() {
   const tags = await apiService.getGenres();
 
   localStorage.setItem(KEY_STORAGE_TAGS, JSON.stringify(tags));
+
+  return await JSON.parse(localStorage.getItem(KEY_STORAGE_TAGS));
 }
 
 function getTagsById(tagsId) {

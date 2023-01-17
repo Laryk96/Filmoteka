@@ -25,6 +25,23 @@ export default class ApiService {
       });
   }
 
+  getPopularSortBy(id) {
+    return axios
+      .get(
+        `${BASE_URL}/3/discover/movie?sort_by=popularity.desc&with_genres=${id}&api_key=${API_KEY}&${this._paga}`
+      )
+      .then(resalt => {
+        this._totalPage = resalt.data.total_pages;
+
+        localStorage.setItem(
+          KEY_STORAGE_FILMS,
+          JSON.stringify(resalt.data.results)
+        );
+
+        return resalt.data.results;
+      });
+  }
+
   getFilms() {
     return axios
       .get(
@@ -32,6 +49,11 @@ export default class ApiService {
       )
       .then(resalt => {
         this._totalPage = resalt.data.total_pages;
+
+        localStorage.setItem(
+          KEY_STORAGE_FILMS,
+          JSON.stringify(resalt.data.results)
+        );
         return resalt.data.results;
       });
   }
