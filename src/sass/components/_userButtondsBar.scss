@@ -9,6 +9,11 @@
 
   gap: 8px;
   margin-bottom: 15px;
+
+  @media screen and (max-width: 767px) {
+    justify-content: space-around;
+    padding: 0 70px;
+  }
 }
 .user-tools__item {
   padding-top: 5px;
@@ -30,12 +35,12 @@
   }
 }
 
-// menu
+// menu modal
 .menu-tags {
-  width: 100%;
+  width: auto;
   display: block;
   position: absolute;
-  right: -100%;
+  right: 0;
   overflow-x: hidden;
   z-index: 10;
   opacity: 0;
@@ -55,9 +60,9 @@
 
   &.is-open {
     display: block;
-    margin: 0 auto;
-    width: 1200px;
+    max-width: 100%;
     height: auto;
+    margin: 0 auto;
     position: static;
     transform: translateX(0);
     opacity: 1;
@@ -94,7 +99,7 @@
     }
   }
 }
-// menu - btn
+// menu sort
 
 .user-tools__btn--menu {
   transform-style: preserve-3d;

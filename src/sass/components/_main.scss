@@ -48,9 +48,15 @@
 
 .contents__item {
   z-index: 1;
+
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    width: 336px;
+  }
   @media screen and (min-width: 1280px) {
     margin-bottom: 16px;
     padding-bottom: 41px;
+
+    width: 394px;
 
     &:hover {
       box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12),
@@ -68,14 +74,6 @@
 .contents__img {
   border-radius: 5px;
   margin-bottom: 10px;
-
-  @media screen and (min-width: 768px) and (max-width: 1279px) {
-    width: 336px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    width: 395px;
-  }
 }
 .wrapper-text {
   margin-left: 10px;
@@ -90,6 +88,15 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.333;
+  color: #000;
+
+  @media screen and (max-width: 767px) {
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+    line-height: 1.2;
+  }
 
   main.dark-theme & {
     color: #fff;
@@ -101,6 +108,11 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.333;
+
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+    line-height: 1.2;
+  }
 }
 
 .pagination {

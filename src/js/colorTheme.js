@@ -1,18 +1,34 @@
 import { refs } from './refs';
-const KEY_STORAGE_THEME = 'darkTheme';
-const ToggleBtn = refs.toggleThemeBtn;
+const KEY_STORAGE_THEME = 'Theme';
+const toggleBtn = refs.toggleThemeBtn;
 const mainBody = refs.maim;
 
-function theme() {
-  ToggleBtn.addEventListener('click', event => {
-    if (!localStorage.getItem('KEY_STORAGE_THEME')) {
-      event.currentTarget.classList.toggle('sun');
-      event.currentTarget.classList.toggle('moon');
+initialTheme();
 
-      localStorage.setItem(KEY_STORAGE_THEME, 'Dark');
+toggleBtn.addEventListener('click', toggleTheme);
 
-      mainBody.classList.toggle('dark-theme');
-    }
-  });
+function toggleTheme() {
+  if (!localStorage.getItem(KEY_STORAGE_THEME)) {
+    event.currentTarget.classList.toggle('sun');
+    event.currentTarget.classList.toggle('moon');
+
+    localStorage.setItem(KEY_STORAGE_THEME, 'Dark');
+
+    mainBody.classList.toggle('dark-theme');
+  } else {
+    event.currentTarget.classList.toggle('sun');
+    event.currentTarget.classList.toggle('moon');
+    mainBody.classList.toggle('dark-theme');
+    localStorage.removeItem(KEY_STORAGE_THEME);
+  }
 }
-theme();
+
+function initialTheme() {
+  if (localStorage.getItem(KEY_STORAGE_THEME)) {
+    toggleBtn.classList.add(`moon`);
+    mainBody.classList.toggle('dark-theme');
+  } else {
+    toggleBtn.classList.add('sun');
+    localStorage.removeItem(KEY_STORAGE_THEME);
+  }
+}
