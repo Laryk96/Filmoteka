@@ -7,7 +7,7 @@ initialTheme();
 
 toggleBtn.addEventListener('click', toggleTheme);
 
-function toggleTheme() {
+function toggleTheme(event) {
   if (!localStorage.getItem(KEY_STORAGE_THEME)) {
     event.currentTarget.classList.toggle('sun');
     event.currentTarget.classList.toggle('moon');

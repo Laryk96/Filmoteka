@@ -1,6 +1,7 @@
 import { refs } from './refs';
 import { getTagsById } from './getTags';
 import { renderCards, createCard } from './renderCards';
+
 const KEY_STORAGE_FILMS = 'films';
 const KEY_TO_WATHED = 'Wathed-List';
 const KEY_FOR_QUEUE = 'Queue-List';
@@ -21,7 +22,7 @@ function openModal(event) {
 
   localStorage.setItem(KEY_CURRENT_ID, JSON.stringify(film.id));
   updateModal(film);
-  refs.btnListModal.addEventListener('click', createWatchedList);
+  refs.modalContainer.addEventListener('click', createWatchedList);
   closeModal();
 }
 
@@ -132,7 +133,6 @@ function createWatchedList(event) {
 
   switch (targetBtn) {
     case 'watched': {
-      console.log(wathedFilmId);
       if (wathedFilmId !== -1) {
         refs.addWatch.textContent = 'ADD TO WATCHED';
 
@@ -140,9 +140,9 @@ function createWatchedList(event) {
         localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
         break;
       }
-
+      console.log(refs.addWatch.textContent);
       refs.addWatch.textContent = 'REMOVE';
-
+      console.log(refs.addWatch.textContent);
       watchedFilms.push(targetFilm);
       localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
       break;
@@ -168,22 +168,3 @@ function createWatchedList(event) {
     }
   }
 }
-
-// function renderCardForLib(film) {
-//   const markup = createCard(film);
-// }
-
-// function pushStorage(key, film) {
-//   localStorage.getItem(key)
-//     ? localStorage.setItem(key, '')
-//     : localStorage.setItem(key, JSON.stringify(film));
-
-//   return localStorage.getItem(key);
-// }
-
-// function handleBtnClick() {}
-
-// function updateStorage() {
-//   localStorage.getItem(KEY_TO_WATHED) !== null
-//     ? localStorage.getItem(KEY_TO_WATHED)
-//     : localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));

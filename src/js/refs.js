@@ -31,7 +31,7 @@ const refs = {
   leftBoxModal: document.querySelector('.left-box'),
   rightBoxModal: document.querySelector('.rigth-box'),
   btnOpenAutorization: document.querySelector('.user-tools__btn--autorization'),
-  autorizationForm: document.querySelector('.form'),
+  autorizationForm: document.querySelector('.form__btn-list'),
 };
 
 export { refs };
