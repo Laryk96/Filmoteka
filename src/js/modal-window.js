@@ -22,6 +22,7 @@ function openModal(event) {
 
   localStorage.setItem(KEY_CURRENT_ID, JSON.stringify(film.id));
   updateModal(film);
+  console.log(refs.addWatch);
   refs.modalContainer.addEventListener('click', createWatchedList);
   closeModal();
 }
@@ -96,10 +97,8 @@ function updateModal(film) {
             <li class="modal__item-value tags">${genre}</li>
           </ul>
         </div>
-
         <h3 class="modal__subtitle">about</h3>
         <p class="modal__text overview">${overview}</p>
-
         <ul class="modal__btn-list">
           <li>
             <button
@@ -117,11 +116,16 @@ function updateModal(film) {
         </ul>`;
 
   refs.leftBoxModal.innerHTML = '';
+  refs.rightBoxModal.innerHTML = '';
+
   refs.leftBoxModal.innerHTML = img;
   refs.rightBoxModal.innerHTML = markup;
 }
 
 function createWatchedList(event) {
+  const watchedBtnEl = document.querySelector('.modal__btn--to-watched');
+  const queueBtnEl = document.querySelector('.modal__btn--to-queue');
+
   const targetBtn = event.target.dataset.list;
   const targetID = Number(localStorage.getItem(KEY_CURRENT_ID));
 
@@ -134,15 +138,15 @@ function createWatchedList(event) {
   switch (targetBtn) {
     case 'watched': {
       if (wathedFilmId !== -1) {
-        refs.addWatch.textContent = 'ADD TO WATCHED';
+        watchedBtnEl.textContent = 'ADD TO WATCHED';
 
         watchedFilms.splice(wathedFilmId, 1);
         localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
         break;
       }
-      console.log(refs.addWatch.textContent);
-      refs.addWatch.textContent = 'REMOVE';
-      console.log(refs.addWatch.textContent);
+
+      watchedBtnEl.textContent = 'REMOVE';
+
       watchedFilms.push(targetFilm);
       localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
       break;
@@ -150,17 +154,17 @@ function createWatchedList(event) {
 
     case 'queue': {
       if (queueFilmId !== -1) {
-        refs.addQueue.textContent = 'ADD TO QUEUE';
+        queueBtnEl.textContent = 'ADD TO QUEUE';
 
         queueFilms.splice(queueFilmId, 1);
         localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
         break;
       }
 
-      refs.addQueue.textContent = 'REMOVE';
-      refs.addQueue.style.backgroundColor = '#ff6b01';
-      refs.addQueue.style.border = 'none';
-      refs.addQueue.style.color = '#ffff';
+      queueBtnEl.textContent = 'REMOVE';
+      queueBtnEl.style.backgroundColor = '#ff6b01';
+      queueBtnEl.style.border = 'none';
+      queueBtnEl.style.color = '#ffff';
 
       queueFilms.push(targetFilm);
       localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
