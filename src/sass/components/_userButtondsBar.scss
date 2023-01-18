@@ -82,6 +82,14 @@
 }
 .menu-tags__item {
   padding: 10px 8px;
+
+  @media screen and (max-width: 767px) {
+    padding: 10px 4px;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    padding: 6px 6px;
+  }
 }
 .menu-tags__link {
   font-size: 18px;

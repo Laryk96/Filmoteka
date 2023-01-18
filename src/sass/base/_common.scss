@@ -8,7 +8,10 @@ body {
   margin: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  overflow-x: hidden;
+
+  &.open-modal {
+    overflow: hidden;
+  }
 }
 
 main {
@@ -26,6 +29,8 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar {
   background-color: #1e2025;
   width: 7px;
+
+  overflow: hidden;
 }
 
 h1,

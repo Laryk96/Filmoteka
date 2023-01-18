@@ -7,6 +7,7 @@ import './js/colorTheme';
 import './js/modal-window';
 import './js/scrollToTo';
 import './js/sortMenu';
+import './js/authorization';
 
 import { getAllTags } from './js/getTags';
 import { renderCards } from './js/renderCards';

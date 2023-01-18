@@ -11,7 +11,8 @@ refs.contentsList.addEventListener('click', openModal);
 
 function openModal(event) {
   event.preventDefault();
-  refs.backdrop.classList.remove('is-hidden');
+  refs.backdropFilm.classList.remove('is-hidden');
+  document.body.classList.add('open-modal');
 
   const targetEl = Number(event.target.closest('li').dataset.id);
   const data = JSON.parse(localStorage.getItem(KEY_STORAGE_FILMS));
@@ -29,18 +30,20 @@ function closeModal() {
 
   document.querySelector('body').addEventListener('keydown', e => {
     if (e.code === 'Escape') {
-      refs.backdrop.classList.add('is-hidden');
+      document.body.classList.remove('open-modal');
+      refs.backdropFilm.classList.add('is-hidden');
     }
   });
 
-  refs.backdrop.addEventListener('click', event => {
+  refs.backdropFilm.addEventListener('click', event => {
     if (
       event.target.classList.contains('modal__close') ||
       event.target.nodeName === 'svg' ||
       event.target.nodeName === 'use' ||
       event.target.classList.contains('backdrop')
     ) {
-      refs.backdrop.classList.add('is-hidden');
+      document.body.classList.remove('open-modal');
+      refs.backdropFilm.classList.add('is-hidden');
     }
   });
 }
@@ -115,12 +118,6 @@ function updateModal(film) {
   refs.leftBoxModal.innerHTML = '';
   refs.leftBoxModal.innerHTML = img;
   refs.rightBoxModal.innerHTML = markup;
-
-  // refs.modalPopular.innerHTML = popularity;
-  // refs.modalTitle.innerHTML = original_title;
-  // refs.modalRaiting.innerHTML = vote_average;
-  // refs.modalOverview.innerHTML = overview;
-  // refs.modalTags.innerHTML = genre;
 }
 
 function createWatchedList(event) {

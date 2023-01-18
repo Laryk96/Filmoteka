@@ -5,9 +5,11 @@ const refs = {
   form: document.querySelector('.search'),
   errorText: document.querySelector('.search__text'),
   paginationList: document.querySelector('.pagination'),
-  backdrop: document.querySelector('.backdrop'),
-  modalWindow: document.querySelector('.modal'),
-  btnModalClose: document.querySelector('.modal__close'),
+  backdropFilm: document.querySelector('.backdrop--film'),
+  backdropAutorization: document.querySelector('.backdrop--autorization'),
+  modalWindow: document.querySelector('.modal-film'),
+  btnModalClose: document.querySelector('.modal__close--film'),
+  btnModalClose: document.querySelector('.modal__close--autorization'),
   modalPopular: document.querySelector('.popularity'),
   modalTags: document.querySelector('.tags'),
   modalRaiting: document.querySelector('.vote_average'),
@@ -28,6 +30,8 @@ const refs = {
   tagsList: document.querySelector('.menu-tags__list'),
   leftBoxModal: document.querySelector('.left-box'),
   rightBoxModal: document.querySelector('.rigth-box'),
+  btnOpenAutorization: document.querySelector('.user-tools__btn--autorization'),
+  autorizationForm: document.querySelector('.form'),
 };
 
 export { refs };

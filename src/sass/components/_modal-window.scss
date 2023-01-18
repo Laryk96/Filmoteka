@@ -7,7 +7,7 @@
   z-index: 3;
 
   backdrop-filter: blur(1px);
-
+  overflow-y: scroll;
   visibility: visible;
   opacity: 1;
   transition: opacity 450ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -20,9 +20,9 @@
   }
 
   @media screen and (max-width: 767px) {
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 40px;
+    padding-left: 35px;
+    padding-right: 35px;
     overflow-y: scroll;
   }
 }
@@ -36,9 +36,13 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 806px;
+    width: 704px;
     height: 558px;
     transform: translate(-50%, -50%);
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 806px;
   }
 
   background: #ffffff;
@@ -178,6 +182,9 @@
   line-height: 1.333;
 }
 .modal__text {
+  @media screen and (max-width: 767px) {
+    margin-bottom: 20px;
+  }
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     margin-bottom: 20px;
   }
@@ -193,6 +200,9 @@
   display: flex;
   gap: 15px;
 
+  @media screen and (max-width: 767px) {
+    justify-content: space-around;
+  }
   .modal__btn--to-watched {
     color: #ffffff;
     background-color: #ff6b01;
