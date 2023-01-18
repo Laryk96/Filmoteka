@@ -2,8 +2,8 @@ import { refs } from './refs';
 import { getTagsById } from './getTags';
 import { renderCards, createCard } from './renderCards';
 const KEY_STORAGE_FILMS = 'films';
-const KEY_FOR_QUEUE = 'Queue-List';
 const KEY_TO_WATHED = 'Wathed-List';
+const KEY_FOR_QUEUE = 'Queue-List';
 const KEY_CURRENT_ID = 'current-ID';
 const watchedFilms = [];
 const queueFilms = [];
@@ -19,8 +19,8 @@ function openModal(event) {
   const film = getFilmOfStorageById(data, targetEl);
 
   localStorage.setItem(KEY_CURRENT_ID, JSON.stringify(film.id));
-  refs.btnListModal.addEventListener('click', createWatchedList);
   updateModal(film);
+  refs.btnListModal.addEventListener('click', createWatchedList);
   closeModal();
 }
 
@@ -63,6 +63,8 @@ function updateModal(film) {
     overview,
     id,
     genre_ids,
+    vote_count,
+    title,
   } = film;
 
   const genre = getTagsById(genre_ids);
@@ -73,17 +75,56 @@ function updateModal(film) {
           width="280"
           loading="lazy"/>`;
 
-  refs.modalImgBox.innerHTML = '';
-  refs.modalImgBox.insertAdjacentHTML('afterbegin', img);
-  refs.modalPopular.innerHTML = popularity;
-  refs.modalTitle.innerHTML = original_title;
-  refs.modalRaiting.innerHTML = vote_average;
-  refs.modalOverview.innerHTML = overview;
-  refs.modalTags.innerHTML = genre;
+  const markup = ` <h2 class="modal__title">${title}</h2>
+        <div class="modal__description">
+          <ul class="modal__list">
+            <li class="modal__item">Vote / Votes</li>
+            <li class="modal__item">Popularity</li>
+            <li class="modal__item">Original Title</li>
+            <li class="modal__item">Genre</li>
+          </ul>
+          <ul class="modal__list-value">
+            <li class="modal__item-value">
+              <span class="modal__item-value--rating vote_average">${vote_average}</span> / ${vote_count}
+            </li>
+            <li class="modal__item-value popularity">${popularity}</li>
+            <li class="modal__item-value original_title">${original_title}</li>
+            <li class="modal__item-value tags">${genre}</li>
+          </ul>
+        </div>
+
+        <h3 class="modal__subtitle">about</h3>
+        <p class="modal__text overview">${overview}</p>
+
+        <ul class="modal__btn-list">
+          <li>
+            <button
+              class="modal__btn modal__btn--to-watched"
+              data-list="watched"
+            >
+              add to Watched
+            </button>
+          </li>
+          <li>
+            <button class="modal__btn modal__btn--to-queue" data-list="queue">
+              add to queue
+            </button>
+          </li>
+        </ul>`;
+
+  refs.leftBoxModal.innerHTML = '';
+  refs.leftBoxModal.innerHTML = img;
+  refs.rightBoxModal.innerHTML = markup;
+
+  // refs.modalPopular.innerHTML = popularity;
+  // refs.modalTitle.innerHTML = original_title;
+  // refs.modalRaiting.innerHTML = vote_average;
+  // refs.modalOverview.innerHTML = overview;
+  // refs.modalTags.innerHTML = genre;
 }
 
 function createWatchedList(event) {
-   const targetBtn = event.target.dataset.list;
+  const targetBtn = event.target.dataset.list;
   const targetID = Number(localStorage.getItem(KEY_CURRENT_ID));
 
   const films = JSON.parse(localStorage.getItem(KEY_STORAGE_FILMS));
@@ -92,67 +133,43 @@ function createWatchedList(event) {
   const wathedFilmId = watchedFilms.findIndex(film => film.id === targetID);
   const queueFilmId = queueFilms.findIndex(film => film.id === targetID);
 
-
   switch (targetBtn) {
-  
     case 'watched': {
       console.log(wathedFilmId);
       if (wathedFilmId !== -1) {
         refs.addWatch.textContent = 'ADD TO WATCHED';
-        
-         watchedFilms.splice(wathedFilmId, 1);
+
+        watchedFilms.splice(wathedFilmId, 1);
         localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
-      break;
+        break;
       }
-    
+
       refs.addWatch.textContent = 'REMOVE';
 
       watchedFilms.push(targetFilm);
-    localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
-    break;
+      localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
+      break;
     }
-      
+
     case 'queue': {
       if (queueFilmId !== -1) {
         refs.addQueue.textContent = 'ADD TO QUEUE';
-    
+
         queueFilms.splice(queueFilmId, 1);
         localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
-      break;
+        break;
       }
 
       refs.addQueue.textContent = 'REMOVE';
-      refs.addQueue.style.backgroundColor = "#ff6b01";
-      refs.addQueue.style.border = "none";
-      refs.addQueue.style.color = "#ffff";
-      
+      refs.addQueue.style.backgroundColor = '#ff6b01';
+      refs.addQueue.style.border = 'none';
+      refs.addQueue.style.color = '#ffff';
+
       queueFilms.push(targetFilm);
       localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
-    break;
+      break;
     }
-    // case "queue": {
-    //   if (queueFilmId !== -1) {
-          
-    //     refs.addQueue.textContent = 'ADD TO QUEUE';
-    //     refs.addQueue.style.backgroundColor = "#ff6b01";
-
-
-    //   queueFilms.splice(removeById, 1);
-    //   localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
-    //   break;
-    //   }
-      
-    //   refs.addQueue.textContent = "REMOVE";
-    //   refs.addQueue.style.backgroundColor = "#ff6b01";
-    //   refs.addQueue.style.border = "none";
-    //   refs.addQueue.style.color = "#ffff";
-      
-      
-    //   queueFilms.push(targetFilm);
-    // localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
-    // break;
-    //   }
-
+  }
 }
 
 // function renderCardForLib(film) {
@@ -173,4 +190,3 @@ function createWatchedList(event) {
 //   localStorage.getItem(KEY_TO_WATHED) !== null
 //     ? localStorage.getItem(KEY_TO_WATHED)
 //     : localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
-// }

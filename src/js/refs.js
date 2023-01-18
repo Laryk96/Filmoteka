@@ -14,7 +14,6 @@ const refs = {
   modalTitle: document.querySelector('.original_title'),
   modalOverview: document.querySelector('.overview'),
   modalContainer: document.querySelector('.modal__container'),
-  modalImgBox: document.querySelector('.left-box'),
   toggleThemeBtn: document.querySelector('.user-tools__btn--toggle'),
   scrollToTop: document.querySelector('.fix-wrapper'),
   btnListModal: document.querySelector('.modal__btn-list'),
@@ -27,6 +26,8 @@ const refs = {
   sortMenu: document.querySelector('.user-tools__btn--menu'),
   tagsMenu: document.querySelector('.menu-tags'),
   tagsList: document.querySelector('.menu-tags__list'),
+  leftBoxModal: document.querySelector('.left-box'),
+  rightBoxModal: document.querySelector('.rigth-box'),
 };
 
 export { refs };
