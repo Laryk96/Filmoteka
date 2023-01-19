@@ -22,7 +22,6 @@ function openModal(event) {
 
   localStorage.setItem(KEY_CURRENT_ID, JSON.stringify(film.id));
   updateModal(film);
-  console.log(refs.addWatch);
   refs.modalContainer.addEventListener('click', createWatchedList);
   closeModal();
 }
@@ -73,6 +72,7 @@ function updateModal(film) {
   } = film;
 
   const genre = getTagsById(genre_ids);
+  const { watched, queue, backgroundColor } = updateBtn(id);
 
   const img = `<img src="https://image.tmdb.org/t/p/w500${poster_path}"
    class="contents__img"
@@ -102,16 +102,13 @@ function updateModal(film) {
         <ul class="modal__btn-list">
           <li>
             <button
-              class="modal__btn modal__btn--to-watched"
-              data-list="watched"
-            >
-              add to Watched
+              class="modal__btn modal__btn--to-watched "
+              data-list="watched" >
+             ${watched}
             </button>
           </li>
           <li>
-            <button class="modal__btn modal__btn--to-queue" data-list="queue">
-              add to queue
-            </button>
+            <button class="modal__btn modal__btn--to-queue ${backgroundColor}" data-list="queue">${queue}</button>
           </li>
         </ul>`;
 
@@ -128,7 +125,6 @@ function createWatchedList(event) {
 
   const targetBtn = event.target.dataset.list;
   const targetID = Number(localStorage.getItem(KEY_CURRENT_ID));
-
   const films = JSON.parse(localStorage.getItem(KEY_STORAGE_FILMS));
   const targetFilm = getFilmOfStorageById(films, targetID);
 
@@ -171,4 +167,19 @@ function createWatchedList(event) {
       break;
     }
   }
+}
+
+function updateBtn(id) {
+  const wathedFilm = JSON.parse(localStorage.getItem(KEY_TO_WATHED));
+  const queueFilm = JSON.parse(localStorage.getItem(KEY_FOR_QUEUE));
+
+  const isWathced = wathedFilm ? wathedFilm.find(film => film.id === id) : null;
+
+  const isQueue = queueFilm ? queueFilm.find(film => film.id === id) : null;
+
+  return {
+    watched: isWathced ? 'REMOVE' : 'ADD TO WATCHED',
+    queue: isQueue ? 'REMOVE' : 'ADD TO QUEUE',
+    backgroundColor: isQueue ? 'add' : '',
+  };
 }
