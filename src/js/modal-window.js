@@ -12,12 +12,17 @@ refs.contentsList.addEventListener('click', openModal);
 
 function openModal(event) {
   event.preventDefault();
+
+  if (event.target === event.currentTarget) {
+    return;
+  }
+
   refs.backdropFilm.classList.remove('is-hidden');
   document.body.classList.add('open-modal');
 
   const targetEl = Number(event.target.closest('li').dataset.id);
-  const data = JSON.parse(localStorage.getItem(KEY_STORAGE_FILMS));
 
+  const data = JSON.parse(localStorage.getItem(KEY_STORAGE_FILMS));
   const film = getFilmOfStorageById(data, targetEl);
 
   localStorage.setItem(KEY_CURRENT_ID, JSON.stringify(film.id));
@@ -135,14 +140,18 @@ function createWatchedList(event) {
     case 'watched': {
       if (wathedFilmId !== -1) {
         watchedBtnEl.textContent = 'ADD TO WATCHED';
-
         watchedFilms.splice(wathedFilmId, 1);
         localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
         break;
       }
 
-      watchedBtnEl.textContent = 'REMOVE';
+      if (!queueFilmId) {
+        queueBtnEl.textContent = 'ADD TO WATCHED';
+        queueFilms.splice(queueFilmId, 1);
+        localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
+      }
 
+      watchedBtnEl.textContent = 'REMOVE';
       watchedFilms.push(targetFilm);
       localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
       break;
@@ -155,6 +164,12 @@ function createWatchedList(event) {
         queueFilms.splice(queueFilmId, 1);
         localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
         break;
+      }
+
+      if (!wathedFilmId) {
+        watchedBtnEl.textContent = 'ADD TO QUEUE';
+        watchedFilms.splice(wathedFilmId, 1);
+        localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
       }
 
       queueBtnEl.textContent = 'REMOVE';
