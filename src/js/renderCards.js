@@ -93,7 +93,7 @@ function renderContentForModal(film) {
         <ul class="modal__btn-list">
           <li>
             <button
-              class="modal__btn modal__btn--to-watched "
+              class="modal__btn modal__btn--to-watched active"
               data-list="watched" >
              ${watched}
             </button>

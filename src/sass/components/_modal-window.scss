@@ -203,12 +203,7 @@
   @media screen and (max-width: 767px) {
     justify-content: space-around;
   }
-  .modal__btn--to-watched {
-    color: #ffffff;
-    background-color: #ff6b01;
-    border: none;
-  }
-  .modal__btn--to-queue {
+  .modal__btn {
     border: 1px solid #000000;
     background-color: transparent;
 
@@ -216,8 +211,15 @@
       color: #fff;
       border-color: #fff;
     }
+
+    &.active {
+      background-color: #ff6b01;
+      color: #fff;
+      border: none;
+    }
   }
-  & .add {
+
+  .add {
     background-color: #ff6b01;
     border: none;
     color: #fff;

@@ -79,7 +79,7 @@ function createWatchedList(event) {
     case 'watched': {
       if (wathedFilmId !== -1) {
         watchedBtnEl.textContent = 'ADD TO WATCHED';
-
+        watchedBtnEl.classList.remove('active');
         watchedFilms.splice(wathedFilmId, 1);
         localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
         break;
@@ -87,15 +87,14 @@ function createWatchedList(event) {
 
       if (!queueFilmId) {
         queueBtnEl.textContent = 'ADD TO WATCHED';
-        queueBtnEl.style.backgroundColor = '#fff';
-        queueBtnEl.style.color = '#000';
-        queueBtnEl.style.border = '1px solid #000';
 
         queueFilms.splice(queueFilmId, 1);
         localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
       }
 
       watchedBtnEl.textContent = 'REMOVE';
+      watchedBtnEl.classList.add('active');
+      queueBtnEl.classList.remove('active');
 
       watchedFilms.push(targetFilm);
       localStorage.setItem(KEY_TO_WATHED, JSON.stringify(watchedFilms));
@@ -105,7 +104,7 @@ function createWatchedList(event) {
     case 'queue': {
       if (queueFilmId !== -1) {
         queueBtnEl.textContent = 'ADD TO QUEUE';
-
+        queueBtnEl.classList.remove('active');
         queueFilms.splice(queueFilmId, 1);
         localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
         break;
@@ -119,10 +118,8 @@ function createWatchedList(event) {
       }
 
       queueBtnEl.textContent = 'REMOVE';
-      queueBtnEl.style.backgroundColor = '#ff6b01';
-      queueBtnEl.style.border = 'none';
-      queueBtnEl.style.color = '#ffff';
-
+      queueBtnEl.classList.add('active');
+      watchedBtnEl.classList.remove('active');
       queueFilms.push(targetFilm);
       localStorage.setItem(KEY_FOR_QUEUE, JSON.stringify(queueFilms));
       break;
