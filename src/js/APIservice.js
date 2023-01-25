@@ -8,12 +8,12 @@ export default class ApiService {
   constructor() {
     this._search = localStorage.getItem(KEY_STORAGE);
     this._totalPage = 0;
-    this.paga = 1;
+    this._paga = 1;
   }
 
-  getPopularFilms() {
+  getPopularFilms(page = 1) {
     return axios
-      .get(`${BASE_URL}/3/trending/movie/day?api_key=${API_KEY}`)
+      .get(`${BASE_URL}/3/trending/movie/day?api_key=${API_KEY}&page=${page}`)
       .then(resalt => {
         this._totalPage = resalt.data.total_pages;
 
@@ -28,7 +28,7 @@ export default class ApiService {
   getPopularSortBy(id) {
     return axios
       .get(
-        `${BASE_URL}/3/discover/movie?sort_by=popularity.desc&with_genres=${id}&api_key=${API_KEY}&${this._paga}`
+        `${BASE_URL}/3/discover/movie?sort_by=popularity.desc&with_genres=${id}&api_key=${API_KEY}&page=${this._paga}`
       )
       .then(resalt => {
         this._totalPage = resalt.data.total_pages;
@@ -78,6 +78,19 @@ export default class ApiService {
 
   get totalPage() {
     return this._totalPage;
+  }
+
+  set totalPage(newTotalPage) {
+    this._totalPage = newTotalPage;
+  }
+  '';
+
+  get page() {
+    return this._page;
+  }
+
+  set page(newPage) {
+    this._paga = newPage;
   }
 }
 

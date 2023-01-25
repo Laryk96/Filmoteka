@@ -1,137 +1,74 @@
-import sprite from '../images/sprite.svg';
+import Pagination from 'tui-pagination';
+import ApiService from './APIservice';
 import { refs } from './refs';
+import sprite from '../images/sprite.svg';
+import { renderCards } from './renderCards';
+const apiService = new ApiService();
+import sprite from '../images/sprite.svg';
 
-export default class Pagination {
-  constructor({ currentPage, totalPages } = {}) {
-    this._currentPage = currentPage;
-    this._totalPages = Math.floor(totalPages / (currentPage * 20));
-    this.beforePage = currentPage - 1;
-    this.beforeTwoPage = currentPage - 2;
-    this.afterPage = currentPage + 1;
-    this.afterTwoPage = currentPage + 2;
-    this.isActive;
-    this.markup = '';
+export default class Paginations {
+  constructor(amount) {
+    this._totalPage = amount;
+    this.option = {
+      totalItems: this.totalPage,
+      itemsPerPage: 20,
+      visiblePages: 5,
+      page: 1,
+      centerAlign: true,
+      firstItemClassName: 'tui-first-child',
+      lastItemClassName: 'tui-last-child',
+
+      template: {
+        page: '<li href="#" class="tui-page-btn">{{page}}</li>',
+        currentPage:
+          '<li class="tui-page-btn tui-is-selected" id="current"><strong >{{page}}</strong></li>',
+        moveButton:
+          '<li href="#" class="tui-page-btn tui-{{type}}">' +
+          '<span class="tui-ico-{{type}}">{{type}}</span>' +
+          '</li>',
+        disabledMoveButton:
+          '<li class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+          '<span class="tui-ico-{{type}}">{{type}}</span>' +
+          '</li>',
+        moreButton:
+          '<li href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+          '<span class="tui-ico-ellip">...</span>' +
+          '</li>',
+      },
+    };
   }
 
-  createPagination() {
-    this.markup = '';
+  createPaginationForMovei() {
+    const option = this.option;
+    const totalPages = this._totalPage;
 
-    if (window.innerWidth > 320 && window.innerWidth < 768) {
-      if (this._currentPage > 1) {
-        this.markup += `<li  class="pagination__item  decrement"> <svg data-page="${
-          this._currentPage - 1
-        }" class="paginate-btn__icon"><use href="${sprite}#icon-arrow-left"></use></svg></li>`;
-      }
-      if (this._currentPage > 1) {
-        this.markup += `<li data-page="${1}" class="pagination__item ">1</li>`;
-      }
+    const pagination = new Pagination('pagination', option);
 
-      if (this._currentPage > 3) {
-        this.markup += `<li data-page="${this.beforeTwoPage}" class="pagination__item ">${this.beforeTwoPage}</li>`;
-      }
+    pagination.on('beforeMove', e => {
+      this.updateElements();
+      apiService.getPopularFilms(e.page).then(films => {
+        renderCards(films);
+      });
 
-      if (this._currentPage > 2) {
-        this.markup += `<li data-page="${this.beforePage}" class="pagination__item ">${this.beforePage}</li>`;
-      }
-      this.markup += `<li data-page="${this._currentPage}" class="pagination__item  current"><b>${this._currentPage}</b></li>`;
-      if (this._totalPages - 1 > this._currentPage) {
-        this.markup += `<li data-page="${this.afterPage}" class="pagination__item  ">${this.afterPage}</li>`;
-      }
-      if (this._totalPages - 2 > this._currentPage) {
-        this.markup += `<li data-page="${this.afterTwoPage}" class="pagination__item ">${this.afterTwoPage}</li>`;
-      }
-
-      if (this._totalPages > this._currentPage) {
-        this.markup += `<li data-page="${this._totalPages}" class="pagination__item ">${this._totalPages}</li>`;
-        this.markup += `<li  class="pagination__item  increment"> <svg data-page="${
-          this._currentPage + 1
-        }" class="paginate-btn__icon"><use href="${sprite}#icon-arrow-right"></use></svg><li>`;
-      }
-    } else {
-      if (this._currentPage > 1) {
-        this.markup += `<li  class="pagination__item  decrement"> <svg data-page="${
-          this._currentPage - 1
-        }" class="paginate-btn__icon"><use href="${sprite}#icon-arrow-left"></use></svg></li>`;
-      }
-      if (this._currentPage > 1) {
-        this.markup += `<li data-page="${1}" class="pagination__item ">1</li>`;
-      }
-      if (this._currentPage > 4) {
-        this.markup += `<li  class="pagination__item pagination__item--dots">...</li>`;
-      }
-      if (this._currentPage > 3) {
-        this.markup += `<li data-page="${this.beforeTwoPage}" class="pagination__item ">${this.beforeTwoPage}</li>`;
-      }
-
-      if (this._currentPage > 2) {
-        this.markup += `<li data-page="${this.beforePage}" class="pagination__item ">${this.beforePage}</li>`;
-      }
-      this.markup += `<li data-page="${this._currentPage}" class="pagination__item current "><b>${this._currentPage}</b></li>`;
-      if (this._totalPages - 1 > this._currentPage) {
-        this.markup += `<li data-page="${this.afterPage}"  class="pagination__item ">${this.afterPage}</li>`;
-      }
-      if (this._totalPages - 2 > this._currentPage) {
-        this.markup += `<li data-page="${this.afterTwoPage}" class="pagination__item ">${this.afterTwoPage}</li>`;
-      }
-      if (this._totalPages - 3 > this._currentPage) {
-        this.markup += `<li class="pagination__item pagination__item--dots">...</li>`;
-      }
-      if (this._totalPages > this._currentPage) {
-        this.markup += `<li data-page="${this._totalPages}" class="pagination__item pagination__item--number">${this._totalPages}</li>`;
-        this.markup += `<li   class="pagination__item  increment"> <svg data-page="${
-          this._currentPage + 1
-        }" class="paginate-btn__icon"><use href="${sprite}#icon-arrow-right"></use></svg><li>`;
-      }
-    }
-
-    this.renderPagination();
+      console.log(e.page);
+    });
   }
-  renderPagination() {
-    refs.paginationList.innerHTML = this.markup;
+
+  updateElements() {
+    const firstEl = document.querySelector('.tui-ico-first');
+    const lastEl = document.querySelector('.tui-ico-last');
+
+    firstEl.innerHTML = '1';
+    lastEl.innerHTML = Math.floor(this._totalPage / 20);
   }
 
   get totalPage() {
     return this._totalPage;
   }
-  set totalPage(newTotalPage) {
-    this._totalPage = newTotalPage;
-  }
 
-  get currentPage() {
-    return this.__currentPage;
-  }
-  set currentPage(newCurrnetPage) {
-    this.__currentPage = newCurrnetPage;
+  set totalPages(newtotalPage) {
+    this._totalPage = newtotalPage;
   }
 }
 
-// if (this.page > 1) {
-//   this.markup += ` <li class="paginate-btn decrement">
-//           <svg class="paginate-btn__icon">
-//             <use href="./images/sprite.svg#icon-arrow-left"></use>
-//           </svg>
-//         </li>`;
-// }
-
-// for (
-//   let pageLength = this.page;
-//   pageLength <= this.afterPage;
-//   pageLength += 1
-// ) {
-//   console.log(pageLength);
-//   if (this.page === pageLength) {
-//     this.isActive = 'active';
-//   } else {
-//     this.isActive = '';
-//   }
-
-//   this.markup += `<li class="number number--${this.isActive}">${pageLength}</li>`;
-// }
-
-// if (this.page < this._allPage) {
-//   this.markup += `   <li class="paginate-btn increment">
-//           <svg class="paginate-btn__icon">
-//             <use href="./images/sprite.svg#icon-arrow-right"></use>
-//           </svg>
-//         </li>`;
-// }
+/* <svg  class="paginate-btn__icon"><use href="${sprite}#icon-arrow-right"></use><svg></svg> */

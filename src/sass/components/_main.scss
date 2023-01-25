@@ -17,6 +17,8 @@
   }
 }
 .gallery {
+  margin-bottom: 60px;
+
   @media screen and (max-width: 767px) {
     display: flex;
     flex-direction: column;
@@ -41,10 +43,10 @@
   }
 }
 
-.paginate {
-  display: flex;
-  justify-content: center;
-}
+// .paginate {
+//   display: flex;
+//   justify-content: center;
+// }
 
 .contents__item {
   z-index: 1;
@@ -115,7 +117,7 @@
   }
 }
 
-.pagination {
+#pagination {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,7 +128,7 @@
   }
 }
 
-.pagination__item {
+.tui-page-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -142,27 +144,49 @@
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
     background-color 250 cubic-bezier(0.4, 0, 0.2, 1);
 
-  &.current {
+  &#current {
     background-color: #ff6b08;
+  }
+
+  &.tui-is-disabled {
+    display: none;
   }
 
   &:hover {
     cursor: pointer;
   }
 
-  &:active {
-    color: #ff6b08;
+  & .tui-ico-next {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+
+    color: transparent;
+    vertical-align: middle;
+    background: url('../images/arrow-left.svg');
+    fill: black;
+  }
+
+  & .tui-ico-prev {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+
+    color: transparent;
+    vertical-align: middle;
+    background: url('../images/arrow-right.svg');
+    fill: black;
   }
 }
 
-.paginate-btn__icon {
-  width: 15px;
-  height: 15px;
+// .paginate-btn__icon {
+//   width: 15px;
+//   height: 15px;
 
-  fill: rgba(0, 0, 0, 0);
-  stroke: currentColor;
+//   fill: rgba(0, 0, 0, 0);
+//   stroke: currentColor;
 
-  main.dark-theme & {
-    color: #fff;
-  }
-}
+//   main.dark-theme & {
+//     color: #fff;
+//   }
+// }
