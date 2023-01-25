@@ -1,5 +1,4 @@
 import { refs } from './refs';
-import { getTagsById } from './getTags';
 import { renderContentForModal } from './renderCards';
 
 const KEY_STORAGE_FILMS = 'Popular movies';
