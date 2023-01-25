@@ -2,10 +2,10 @@ import { refs } from './refs';
 import { getTagsById } from './getTags';
 import { renderCards, createCard } from './renderCards';
 
-const KEY_STORAGE_FILMS = 'films';
-const KEY_TO_WATHED = 'Wathed-List';
-const KEY_FOR_QUEUE = 'Queue-List';
-const KEY_CURRENT_ID = 'current-ID';
+const KEY_STORAGE_FILMS = 'Popular movies';
+const KEY_TO_WATHED = 'Wathed list';
+const KEY_FOR_QUEUE = 'Queue list';
+const KEY_CURRENT_ID = 'Current ID';
 const watchedFilms = [];
 const queueFilms = [];
 refs.contentsList.addEventListener('click', openModal);

@@ -1,6 +1,6 @@
 import Notiflix from 'notiflix';
 import { refs } from './refs';
-const KEY_USER = 'user';
+const KEY_USER = 'User';
 
 refs.btnOpenAutorization.addEventListener('click', openModalAutorization);
 refs.autorizationForm.addEventListener('click', onSubmitForm);

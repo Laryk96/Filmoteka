@@ -1,6 +1,6 @@
 import ApiService from './APIservice';
 const apiService = new ApiService();
-const KEY_STORAGE_TAGS = 'tags';
+const KEY_STORAGE_TAGS = 'Tags list';
 
 async function getAllTags() {
   const tags = await apiService.getGenres();

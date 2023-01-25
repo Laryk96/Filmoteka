@@ -1,9 +1,8 @@
 import axios from 'axios';
 
 const API_KEY = 'b1cb6bb9f0fb8b16da0ef0bac91fc5ae';
-const KEY_STORAGE = 'search';
 const BASE_URL = 'https://api.themoviedb.org';
-const KEY_STORAGE_FILMS = 'films';
+const KEY_STORAGE_FILMS = 'Popular movies';
 export default class ApiService {
   constructor() {
     this._search = ' ';

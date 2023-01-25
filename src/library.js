@@ -6,8 +6,8 @@ import './js/sortMenu';
 
 import { renderCards } from './js/renderCards';
 
-const KEY_TO_WATHED = 'Wathed-List';
-const KEY_FOR_QUEUE = 'Queue-List';
+const KEY_TO_WATHED = 'Wathed list';
+const KEY_FOR_QUEUE = 'Queue list';
 
 refs.changeListLib.addEventListener('click', onBtnClick);
 
