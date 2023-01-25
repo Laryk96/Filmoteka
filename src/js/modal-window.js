@@ -1,6 +1,6 @@
 import { refs } from './refs';
 import { getTagsById } from './getTags';
-import { renderCards, createCard, renderContentForModal } from './renderCards';
+import { renderContentForModal } from './renderCards';
 
 const KEY_STORAGE_FILMS = 'Popular movies';
 const KEY_TO_WATHED = 'Wathed list';
