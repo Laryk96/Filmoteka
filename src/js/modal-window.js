@@ -27,8 +27,6 @@ function openModal(event) {
   const data = JSON.parse(localStorage.getItem(KEY_STORAGE_FILMS));
   const film = getFilmOfStorageById(data, targetEl);
 
-  console.log(data);
-  console.log(film);
   localStorage.setItem(KEY_CURRENT_ID, JSON.stringify(film.id));
   updateModal(film);
   refs.modalContainer.addEventListener('click', createWatchedList);
