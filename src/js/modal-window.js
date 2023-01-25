@@ -6,8 +6,10 @@ const KEY_STORAGE_FILMS = 'Popular movies';
 const KEY_TO_WATHED = 'Wathed list';
 const KEY_FOR_QUEUE = 'Queue list';
 const KEY_CURRENT_ID = 'Current ID';
+
 const watchedFilms = [];
 const queueFilms = [];
+
 refs.contentsList.addEventListener('click', openModal);
 
 function openModal(event) {
@@ -25,6 +27,8 @@ function openModal(event) {
   const data = JSON.parse(localStorage.getItem(KEY_STORAGE_FILMS));
   const film = getFilmOfStorageById(data, targetEl);
 
+  console.log(data);
+  console.log(film);
   localStorage.setItem(KEY_CURRENT_ID, JSON.stringify(film.id));
   updateModal(film);
   refs.modalContainer.addEventListener('click', createWatchedList);
