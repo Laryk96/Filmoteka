@@ -3,8 +3,9 @@ import ApiService from './APIservice';
 import { refs } from './refs';
 import sprite from '../images/sprite.svg';
 import { renderCards } from './renderCards';
-const apiService = new ApiService();
 import sprite from '../images/sprite.svg';
+
+const apiService = new ApiService();
 
 export default class Paginations {
   constructor(amount) {
@@ -38,9 +39,8 @@ export default class Paginations {
     };
   }
 
-  createPaginationForMovei() {
+  paginationForPopularMovie() {
     const option = this.option;
-    const totalPages = this._totalPage;
 
     const pagination = new Pagination('pagination', option);
 
@@ -49,8 +49,34 @@ export default class Paginations {
       apiService.getPopularFilms(e.page).then(films => {
         renderCards(films);
       });
+    });
+  }
 
-      console.log(e.page);
+  paginationForSearchMovie(search) {
+    const option = this.option;
+    const pagination = new Pagination('pagination', option);
+
+    pagination.on('beforeMove', e => {
+      this.updateElements();
+      apiService._search = search;
+      apiService._paga = e.page;
+      apiService.getFilms().then(films => {
+        renderCards(films);
+      });
+    });
+  }
+
+  paginationForSortBy(id) {
+    const option = this.option;
+    const pagination = new Pagination('pagination', option);
+
+    pagination.on('beforeMove', e => {
+      this.updateElements();
+
+      apiService._paga = e.page;
+      apiService.getPopularSortBy(id).then(films => {
+        renderCards(films);
+      });
     });
   }
 

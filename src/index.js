@@ -18,10 +18,10 @@ const apiService = new ApiService();
 getAllTags();
 
 apiService.getPopularFilms().then(films => {
-  const paginate = new Paginations(apiService._totalPage);
+  const pagination = new Paginations(apiService._totalPage);
 
-  paginate.createPaginationForMovei();
-  paginate.updateElements();
+  pagination.paginationForPopularMovie();
+  pagination.updateElements();
   renderCards(films);
 });
 
@@ -52,10 +52,10 @@ function request(search) {
         return refs.errorText.classList.remove('hidden');
       }
 
-      const paginate = new Paginations(apiService._totalPage);
+      const pagination = new Paginations(apiService._totalPage);
 
-      paginate.createPaginationForMovei();
-      paginate.updateElements();
+      pagination.paginationForSearchMovie(search);
+      pagination.updateElements();
 
       refs.contentsList.innerHTML = '';
       renderCards(films);

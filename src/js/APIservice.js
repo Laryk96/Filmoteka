@@ -6,7 +6,7 @@ const BASE_URL = 'https://api.themoviedb.org';
 const KEY_STORAGE_FILMS = 'films';
 export default class ApiService {
   constructor() {
-    this._search = localStorage.getItem(KEY_STORAGE);
+    this._search = ' ';
     this._totalPage = 0;
     this._paga = 1;
   }

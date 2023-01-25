@@ -3,6 +3,7 @@ import { getAllTags } from './getTags';
 import { refs } from './refs';
 import { renderCards } from './renderCards';
 import { renderTagsList } from './renderTagsMenu';
+import Paginations from './pagination';
 
 const apiService = new ApiService();
 
@@ -26,7 +27,9 @@ refs.tagsList.addEventListener('click', event => {
   console.log(currentSortBy);
 
   apiService.getPopularSortBy(currentSortBy).then(films => {
-    console.log(films.map(film => film.title));
+    const pagination = new Paginations(apiService._totalPage);
+    pagination.paginationForSortBy(currentSortBy);
+    pagination.updateElements();
     renderCards(films);
   });
 });

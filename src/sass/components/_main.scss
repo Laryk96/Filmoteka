@@ -43,11 +43,6 @@
   }
 }
 
-// .paginate {
-//   display: flex;
-//   justify-content: center;
-// }
-
 .contents__item {
   z-index: 1;
 
@@ -134,7 +129,7 @@
   justify-content: center;
   width: 40px;
   height: 100%;
-  color: #fff;
+
   font-weight: 500;
   font-size: 12px;
   line-height: 1.333;
@@ -160,7 +155,7 @@
     display: inline-block;
     width: 16px;
     height: 16px;
-    stroke: #ff6b08;
+
     color: transparent;
     vertical-align: middle;
     background: url('../images/arrow-left.svg');
@@ -174,8 +169,6 @@
     color: transparent;
     vertical-align: middle;
     background: url('../images/arrow-right.svg');
-    fill: #ff6b08;
-    stroke: #ff6b08;
   }
 }
 
