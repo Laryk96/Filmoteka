@@ -28,8 +28,8 @@ function openModal(event) {
 
   localStorage.setItem(KEY_CURRENT_ID, JSON.stringify(film.id));
   renderContentForModal(film);
-  // refs.modalContainer.addEventListener('click', createWatchedList);
-  // closeModal();
+  refs.modalContainer.addEventListener('click', createWatchedList);
+  closeModal();
 }
 
 function closeModal() {
