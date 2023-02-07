@@ -14,18 +14,18 @@ refs.changeListLib.addEventListener('click', onBtnClick);
 updateCards();
 
 function onBtnClick(e) {
-  const tab = e.target.dataset.btn;
-  const targetEl = e.target;
+  const currentBtn = e.target.dataset.btn;
 
-  targetEl.classList.toggle('current');
-
-  console.log(e.currentTarget);
-  switch (tab) {
+  switch (currentBtn) {
     case 'watched': {
+      refs.watchedLibraryBrn.classList.add('current');
+      refs.queueLibraryBrn.classList.remove('current');
       updateCards();
       break;
     }
     case 'queue': {
+      refs.queueLibraryBrn.classList.add('current');
+      refs.watchedLibraryBrn.classList.remove('current');
       updateCards(KEY_FOR_QUEUE);
       break;
     }
