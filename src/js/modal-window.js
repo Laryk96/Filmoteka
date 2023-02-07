@@ -56,7 +56,6 @@ function closeModal() {
 }
 
 function getFilmOfStorageById(films, id) {
-  console.log(films);
   for (const film of films) {
     if (film.id === id) {
       return film;
